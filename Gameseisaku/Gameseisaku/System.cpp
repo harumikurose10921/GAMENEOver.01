@@ -9,6 +9,7 @@ extern void Terminate();
  LPDIRECT3D9				g_pD3D;
  LPDIRECT3DDEVICE9		g_pd3dDevice;
 
+
 //DirectX‚ğ‰Šú‰»
 void InitD3D(HWND hWnd)
 {
