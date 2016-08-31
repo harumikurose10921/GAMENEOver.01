@@ -8,7 +8,7 @@ extern void Terminate();
 
  LPDIRECT3D9				g_pD3D;
  LPDIRECT3DDEVICE9		g_pd3dDevice;
-
+ EffectManager*			g_effectManager = NULL;
 
 //DirectXを初期化
 void InitD3D(HWND hWnd)
@@ -28,6 +28,8 @@ void InitD3D(HWND hWnd)
 	g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
 		D3DCREATE_SOFTWARE_VERTEXPROCESSING,
 		&d3dpp, &g_pd3dDevice);
+
+	g_effectManager = new EffectManager;
 }
 //メッセージプロシージャー
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)

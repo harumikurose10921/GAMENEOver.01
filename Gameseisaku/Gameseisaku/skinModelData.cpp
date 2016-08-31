@@ -587,8 +587,7 @@ namespace {
 
 
 }
-SkinModelData::SkinModelData() :
-frameRoot(nullptr)
+SkinModelData::SkinModelData() :frameRoot(nullptr)
 {
 
 }
@@ -602,7 +601,17 @@ void SkinModelData::Release()
 }
 void SkinModelData::LoadModelData(const char* filePath)
 {
-	
+	AllocateHierarchy alloc;
+	HRESULT hr = D3DXLoadMeshHierarchyFromX(
+		filePath,
+		D3DXMESH_VB_MANAGED,
+		g_pd3dDevice,
+		&alloc,
+		nullptr,
+		&frameRoot,
+		&pAnimController
+		);
+	SetupBoneMatrixPointers(frameRoot, frameRoot);
 }
 void SkinModelData::UpdateBoneMatrix(const D3DXMATRIX& matWorld)
 {

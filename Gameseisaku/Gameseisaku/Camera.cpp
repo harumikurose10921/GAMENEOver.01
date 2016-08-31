@@ -10,8 +10,6 @@ Camera::Camera()
 //デストラクタ
 Camera::~Camera()
 {
-
-
 }
 //アスペクト比のセッター
 void Camera::SetAspect(float _aspect)

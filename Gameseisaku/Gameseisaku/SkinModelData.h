@@ -26,10 +26,13 @@ public:
 		LPD3DXFRAME GetFrameRoot()
 	{
 			return frameRoot;
-		}
-	
+	}
+	ID3DXAnimationController* GetAnimationController()
+	{
+			return pAnimController;
+	}
 	void UpdateBoneMatrix(const D3DXMATRIX& matWorld);
 private:
 	LPD3DXFRAME					frameRoot;		//フレームルート。
-	
+	ID3DXAnimationController*   pAnimController;
 };

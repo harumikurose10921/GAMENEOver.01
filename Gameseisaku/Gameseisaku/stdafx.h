@@ -9,6 +9,7 @@
 #pragma warning( default : 4996 )
 #include<cstdlib>
 #include <vector>
+#include <map>
 #include "System.h"
 
 #include "Camera.h"

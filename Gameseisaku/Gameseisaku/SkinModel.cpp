@@ -171,6 +171,7 @@ SkinModel::~SkinModel()
 }
 void SkinModel::Init(SkinModelData* modelData)
 {
+	pEffect = g_effectManager->LoadEffect("Assets/Shader/Model.fx");
 	skinModelData = modelData;
 }
 
