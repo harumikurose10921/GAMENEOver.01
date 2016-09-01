@@ -1,21 +1,16 @@
 #include "stdafx.h"
 #include "Camera.h"
-#include "Player.h"
+#include "game.h"
 
 
+Game* game;
 Camera camera;
-Player player;
+
 //初期化処理。
 void Init()
 {
-	////カメラ初期化。
-	//camera.Init();
-	//camera.SetEyept(D3DXVECTOR3(0.0f, 1.0f, 2.0f));
-	//camera.SetLookatPt(D3DXVECTOR3(0.0f, 0.5f, 0.0f));
-	//camera.Update();
-
-	player.Init();
-	camera.Init();
+	game = new Game;
+	game->Start();
 }
 //描画処理。
 VOID Render()
@@ -27,8 +22,7 @@ VOID Render()
   //シーンの描画開始。
 	g_pd3dDevice->BeginScene();
 
-	//Player描画
-	player.Render();
+	game->Render();
 
   // シーンの描画終了。
 	g_pd3dDevice->EndScene();
@@ -39,14 +33,13 @@ VOID Render()
 //更新処理。
 void Update()
 {
-	player.Update();
-	camera.Update();
-	
+	game->Update();
 }
 //ゲームが終了したときに呼ばれる処理。
 void Terminate()
 {
-	
+	delete game;
+	delete g_effectManager;
 	g_pd3dDevice->Release();
 	g_pD3D->Release();
 }

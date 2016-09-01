@@ -90,18 +90,17 @@ D3DXMATRIX Camera::GetprojectionMatrix()
 	return projectionMatrix;
 }
 
+void Camera::Init()
+{
+	vEyePt = D3DXVECTOR3(0.0f, 10.0f, -15.0f);
+	vLookatPt = D3DXVECTOR3(0.0f, 5.0f, 0.0f);
+	vUpVec = D3DXVECTOR3(0.0f, 10.0f, 0.0f);
+
+	/*Update();*/
+}
 
 void Camera::Update()
 {
 	D3DXMatrixLookAtLH(&viewMatrix, &vEyePt, &vLookatPt, &vUpVec);
 	D3DXMatrixPerspectiveFovLH(&projectionMatrix, D3DX_PI / 4, aspect, Near, Far);
-}
-
-void Camera::Init()
-{
-	vEyePt = D3DXVECTOR3(0.0f, 3.0f, -5.0f);
-	vLookatPt = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	vUpVec = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-
-	Update();
 }

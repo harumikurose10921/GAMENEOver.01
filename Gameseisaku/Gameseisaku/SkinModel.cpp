@@ -159,6 +159,20 @@ namespace{
 				light
 				);
 		}
+
+		if (pFrame->pFrameFirstChild != NULL)
+		{
+			DrawFrame(
+				pd3dDevice,
+				pFrame->pFrameFirstChild,
+				pEffect,
+				worldMatrix,
+				rotationMatrix,
+				viewMatrix,
+				projMatrix,
+				light
+				);
+		}
 	}
 }
 SkinModel::SkinModel() :skinModelData(nullptr),light(nullptr),pEffect(nullptr)

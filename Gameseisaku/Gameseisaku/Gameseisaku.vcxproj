@@ -84,6 +84,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="ground.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SkinModel.cpp" />
@@ -95,6 +96,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="ground.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SkinModel.h" />

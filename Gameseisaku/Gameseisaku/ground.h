@@ -1,22 +1,20 @@
 #pragma once
 
-class Game;
-class Player
+class ground
 {
 public:
-	Player();
-	~Player();
+	ground();
+	~ground(); 
 	void Init();
-	void Update();
+	void Updeate();
 	void Render();
-	void Rerase();
-	void SetPosition(D3DXVECTOR3 pos);
-	
+	void Setposition(D3DXVECTOR3 pos){
+		position = pos;
+	}
 private:
 	D3DXVECTOR3 position;
 	D3DXMATRIX  mWorld;
 	D3DXMATRIX  mRotation;
-	//Camera camera;
 	SkinModel model;
 	SkinModelData modeldata;
 	Light light;

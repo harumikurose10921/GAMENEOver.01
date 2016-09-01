@@ -1,20 +1,21 @@
 #include "stdafx.h"
-#include "Player.h"
+#include "ground.h"
 #include "game.h"
 
-Player::Player()
-{
-		
-
-}
-
-Player::~Player()
+ground::ground()
 {
 
 }
 
-void Player::Init()
+ground::~ground(){
+
+}
+
+void ground::Init()
 {
+	position.x = 0.0f;
+	position.y = 5.0f;
+	position.z = 0.0f;
 
 	//ƒ‰ƒCƒg‰Šú‰»
 	light.SetdiffuseLightDirection(0, D3DXVECTOR4(0.707f, 0.0f, -0.707f, 1.0f));
@@ -28,39 +29,16 @@ void Player::Init()
 	light.SetdiffuseLightColor(3, D3DXVECTOR4(0.2f, 0.2f, 0.2f, 1.0f));
 	light.SetambientLight(D3DXVECTOR4(0.3f, 0.3f, 0.3f, 1.0f));
 
-	modeldata.LoadModelData("Assets/model/Unity.x");
+	modeldata.LoadModelData("Assets/model/court.x");
 	model.Init(&modeldata);
 	model.SetLight(&light);
 }
-
-void Player::Update()
+void ground::Updeate()
 {
-	
-	if (GetAsyncKeyState('W')&0x8000){
-		position.z += 1.5f;
-	}
-	else if (GetAsyncKeyState('S') & 0x8000){
-		position.z -= 1.5f;
-	}
-
-	/*else if (GetAsyncKeyState('A') & 0x800){
-		position.x -= 0.5f;
-	}
-	else if (GetAsyncKeyState('D') & 0x800){
-		position.x += 0.5f;
-	}*/
-
-	model.UpdateWorldMatrix(position, D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f), D3DXVECTOR3(1.0f, 1.0f, 1.0f));
+	model.UpdateWorldMatrix(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f), D3DXVECTOR3(1.0f, -2.0f, 1.0f));
 }
 
-void Player::Render()
+void ground::Render()
 {
-	//ƒ‚ƒfƒ‹•`‰æ
-	model.Draw(&game->GetCamera().GetviewMatrix(),&game->GetCamera().GetprojectionMatrix());
+	model.Draw(&game->GetCamera().GetviewMatrix(), &game->GetCamera().GetprojectionMatrix());
 }
-
-void Player::SetPosition(D3DXVECTOR3 pos)
-{
-	position = pos;
-}
-
