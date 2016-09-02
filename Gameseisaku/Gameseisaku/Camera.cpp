@@ -101,6 +101,11 @@ void Camera::Init()
 
 void Camera::Update()
 {
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+	{
+
+	}
+
 	D3DXMatrixLookAtLH(&viewMatrix, &vEyePt, &vLookatPt, &vUpVec);
 	D3DXMatrixPerspectiveFovLH(&projectionMatrix, D3DX_PI / 4, aspect, Near, Far);
 }

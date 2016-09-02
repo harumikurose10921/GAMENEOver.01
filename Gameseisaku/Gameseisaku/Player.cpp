@@ -15,6 +15,7 @@ Player::~Player()
 
 void Player::Init()
 {
+	tRodi = 0.0f;
 
 	//ÉâÉCÉgèâä˙âª
 	light.SetdiffuseLightDirection(0, D3DXVECTOR4(0.707f, 0.0f, -0.707f, 1.0f));
@@ -35,22 +36,32 @@ void Player::Init()
 
 void Player::Update()
 {
-	
+	bool isTrun = false;
 	if (GetAsyncKeyState('W')&0x8000){
-		position.z += 1.5f;
+		position.z += 0.05f;
+		tRodi = D3DXToRadian(360);
+		isTrun = true;
 	}
 	else if (GetAsyncKeyState('S') & 0x8000){
-		position.z -= 1.5f;
+		position.z -= 0.05f;
+		tRodi = D3DXToRadian(180);
+		isTrun = true;
+	}
+	
+	if (GetAsyncKeyState('A') & 0x8000){
+		position.x +=  0.05;
+		tRodi = D3DXToRadian(90.0f);
+	}
+	else if (GetAsyncKeyState('D') & 0x8000){
+		position.x -= 0.05f;
+		tRodi = D3DXToRadian(-90.0f);
 	}
 
-	/*else if (GetAsyncKeyState('A') & 0x800){
-		position.x -= 0.5f;
-	}
-	else if (GetAsyncKeyState('D') & 0x800){
-		position.x += 0.5f;
-	}*/
+	D3DXQUATERNION qRot;
+	D3DXVECTOR3 vY(0.0f, 0.1f, 0.0f);
+	D3DXQuaternionRotationAxis(&qRot, &vY, tRodi);
 
-	model.UpdateWorldMatrix(position, D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f), D3DXVECTOR3(1.0f, 1.0f, 1.0f));
+	model.UpdateWorldMatrix(position, qRot, D3DXVECTOR3(1.0f, 1.0f, 1.0f));
 }
 
 void Player::Render()

@@ -1,5 +1,5 @@
 #pragma once
-
+#include "turn.h"
 class Game;
 class Player
 {
@@ -20,4 +20,7 @@ private:
 	SkinModel model;
 	SkinModelData modeldata;
 	Light light;
+	Trun trun;
+	
+	float tRodi;
 };
