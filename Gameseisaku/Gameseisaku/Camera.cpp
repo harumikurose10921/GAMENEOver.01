@@ -1,11 +1,18 @@
 #include "stdafx.h"
 #include "Camera.h"
+#include"Player.h"
+
 //コンストラクタ
 Camera::Camera()
 {
 	Near = 0.1f;
 	Far = 100.0f;
 	aspect = 1.0f;
+	position.x = 0.0f;
+	position.y = 0.0f;
+	position.z = 0.0f;
+	
+	
 }
 //デストラクタ
 Camera::~Camera()
@@ -90,22 +97,44 @@ D3DXMATRIX Camera::GetprojectionMatrix()
 	return projectionMatrix;
 }
 
-void Camera::Init()
+void Camera::Init(Player* player)
 {
-	vEyePt = D3DXVECTOR3(0.0f, 10.0f, -15.0f);
-	vLookatPt = D3DXVECTOR3(0.0f, 5.0f, 0.0f);
-	vUpVec = D3DXVECTOR3(0.0f, 10.0f, 0.0f);
-
-	/*Update();*/
+	SetPosition(D3DXVECTOR3(0.0f, 0.8, 3.0));
+	vEyePt = D3DXVECTOR3(0.0f, 10.0f, -5.0f);
+	vLookatPt = D3DXVECTOR3(0.0f, 7.0f,0.0f);
+	vUpVec = D3DXVECTOR3(0.0f, 15.0f, 0.0f);
+	toPos = GetEyept() - GetLookatPt();
+	this->player = player;
+	Update();
 }
 
 void Camera::Update()
 {
+	
+	
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 	{
-
+		CameraRo(0.05f);
+	}
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+	{
+		CameraRo(-0.05f);
 	}
 
 	D3DXMatrixLookAtLH(&viewMatrix, &vEyePt, &vLookatPt, &vUpVec);
 	D3DXMatrixPerspectiveFovLH(&projectionMatrix, D3DX_PI / 4, aspect, Near, Far);
+	SetLookatPt(player->GetPosition());
+	//SetEyept(player->GetPosition() + toPos);
+	SetPosition(vEyePt);\
+}
+
+void Camera::CameraRo(float vF)
+{
+	toPos = GetEyept() - GetLookatPt();
+	D3DXMatrixRotationY(&Rot, vF);
+	D3DXVec3Transform(&OutPos, &toPos, &Rot);
+	cameraPos.x = GetLookatPt().x + OutPos.x;
+	cameraPos.y = GetLookatPt().y + OutPos.y;
+	cameraPos.z = GetLookatPt().z + OutPos.z;
+	SetEyept(cameraPos);
 }

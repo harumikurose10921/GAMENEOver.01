@@ -1,6 +1,9 @@
 #pragma once
 #include "Player.h"
 #include "ground.h"
+#include "Sky.h"
+#include "Map.h"
+
 class Game
 {
 public:
@@ -17,5 +20,7 @@ private:
 	Player player;
 	Camera camera;
 	ground ground;
+	Sky    sky;
+	Map    map;
 };
 extern Game* game;

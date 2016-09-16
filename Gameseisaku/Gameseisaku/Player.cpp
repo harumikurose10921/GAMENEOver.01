@@ -4,7 +4,7 @@
 
 Player::Player()
 {
-		
+	
 
 }
 
@@ -16,6 +16,9 @@ Player::~Player()
 void Player::Init()
 {
 	tRodi = 0.0f;
+	position.x = 0.0f;
+	position.y = 0.0f;
+	position.z = 0.0f;
 
 	//ƒ‰ƒCƒg‰Šú‰»
 	light.SetdiffuseLightDirection(0, D3DXVECTOR4(0.707f, 0.0f, -0.707f, 1.0f));
@@ -49,12 +52,12 @@ void Player::Update()
 	}
 	
 	if (GetAsyncKeyState('A') & 0x8000){
-		position.x +=  0.05;
-		tRodi = D3DXToRadian(90.0f);
+		position.x -=  0.05;
+		tRodi = D3DXToRadian(-90.0f);
 	}
 	else if (GetAsyncKeyState('D') & 0x8000){
-		position.x -= 0.05f;
-		tRodi = D3DXToRadian(-90.0f);
+		position.x += 0.05f;
+		tRodi = D3DXToRadian(90.0f);
 	}
 
 	D3DXQUATERNION qRot;
@@ -68,10 +71,5 @@ void Player::Render()
 {
 	//ƒ‚ƒfƒ‹•`‰æ
 	model.Draw(&game->GetCamera().GetviewMatrix(),&game->GetCamera().GetprojectionMatrix());
-}
-
-void Player::SetPosition(D3DXVECTOR3 pos)
-{
-	position = pos;
 }
 

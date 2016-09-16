@@ -1,5 +1,6 @@
 #pragma once
 
+class Player;
 class Camera
 {
 public:
@@ -38,15 +39,33 @@ public:
 	//注視点えお取得
 	D3DXVECTOR3 GetLookatPt();
 
-	void Init();
+	void SetPosition(D3DXVECTOR3 pos){
+		position = pos;
+	}
+
+	D3DXVECTOR3 GetPosition()
+	{
+		return  position;
+	}
+
+	void CameraRo(float vF);
+	void Init(Player* player);
 	void Update();
+
 private:
+	D3DXVECTOR3             position;			//カメラの位置
 	D3DXMATRIX				viewMatrix;			//!<ビュー行列。
 	D3DXMATRIX				projectionMatrix;	//!<プロジェクション行列。
 	D3DXVECTOR3				vEyePt;				//!カメラの視点。
 	D3DXVECTOR3				vLookatPt;			//!カメラの注視点。どこを見ているかという情報。
 	D3DXVECTOR3				vUpVec;				//!カメラの上方向。
+	D3DXVECTOR3				vP;					//視点-注視点
 	float					Far;				//!<遠平面。
 	float					Near;				//!<近平面。
-	float					aspect;				//!<アスペクト比
+	float					aspect;				//!<アスペクト
+	D3DXMATRIX				Rot;
+	D3DXVECTOR4				OutPos;
+	D3DXVECTOR3				cameraPos;
+	D3DXVECTOR3             toPos;
+	Player*					player;
 };
