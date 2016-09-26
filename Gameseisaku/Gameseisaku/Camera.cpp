@@ -6,7 +6,7 @@
 Camera::Camera()
 {
 	Near = 0.1f;
-	Far = 100.0f;
+	Far = 1000.0f;
 	aspect = 1.0f;
 	position.x = 0.0f;
 	position.y = 0.0f;
@@ -100,7 +100,7 @@ D3DXMATRIX Camera::GetprojectionMatrix()
 void Camera::Init(Player* player)
 {
 	SetPosition(D3DXVECTOR3(0.0f, 0.8, 3.0));
-	vEyePt = D3DXVECTOR3(0.0f, 10.0f, -5.0f);
+	vEyePt = D3DXVECTOR3(0.0f, 10.0f, -8.0f);
 	vLookatPt = D3DXVECTOR3(0.0f, 7.0f,0.0f);
 	vUpVec = D3DXVECTOR3(0.0f, 15.0f, 0.0f);
 	toPos = GetEyept() - GetLookatPt();
@@ -124,8 +124,8 @@ void Camera::Update()
 	D3DXMatrixLookAtLH(&viewMatrix, &vEyePt, &vLookatPt, &vUpVec);
 	D3DXMatrixPerspectiveFovLH(&projectionMatrix, D3DX_PI / 4, aspect, Near, Far);
 	SetLookatPt(player->GetPosition());
-	//SetEyept(player->GetPosition() + toPos);
-	SetPosition(vEyePt);\
+	SetEyept(player->GetPosition() + toPos);
+	//SetPosition(vEyePt+toPos);
 }
 
 void Camera::CameraRo(float vF)

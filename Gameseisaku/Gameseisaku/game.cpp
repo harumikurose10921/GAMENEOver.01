@@ -20,7 +20,7 @@ void Game::Start()
 	camera.SetLookatPt(D3DXVECTOR3(0.0f, 0.5f, 0.0f));
 	camera.Update();
 	player.Init();
-	ground.Init();
+	//ground.Init();
 	sky.Start();
 	map.Start();
 	
@@ -31,7 +31,7 @@ void Game::Update()
 {
 	camera.Update();
 	player.Update();
-	ground.Updeate();
+	//ground.Updeate();
 	sky.Update();
 	map.Update();
 
@@ -39,7 +39,7 @@ void Game::Update()
 void Game::Render()
 {
 	player.Render();
-	ground.Render();
+	//ground.Render();
 	sky.Render();
 	map.Render();
 }

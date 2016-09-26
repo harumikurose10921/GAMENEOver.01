@@ -19,7 +19,7 @@ Sky::Sky()
 	light.SetdiffuseLightColor(3, D3DXVECTOR4(0.2f, 0.2f, 0.2f, 1.0f));
 	light.SetambientLight(D3DXVECTOR4(0.3f, 0.3f, 0.3f, 1.0f));
 
-	modeldata.LoadModelData("Assets/model/Sky.X");
+	modeldata.LoadModelData("Assets/model/sky.x");
 	model.Init(&modeldata);
 	model.SetLight(&light);
 	
@@ -27,7 +27,7 @@ Sky::Sky()
 
 void Sky::Update()
 {
-	model.UpdateWorldMatrix(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f), D3DXVECTOR3(1.0f, 1.0f, 1.0f));
+	model.UpdateWorldMatrix(D3DXVECTOR3(0.0f, -25.0f, 0.0f), D3DXQUATERNION(0.0f, 0.0f, 0.0f, 1.0f), D3DXVECTOR3(1.0f, 1.0f, 1.0f));
 }
 void Sky::Render()
 {

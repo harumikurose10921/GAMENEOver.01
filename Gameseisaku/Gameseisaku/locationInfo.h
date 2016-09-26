@@ -1,21 +1,24 @@
-﻿//Palmtree
+﻿//bilud_1
 {
-	"Palmtree",
-	D3DXVECTOR3(8.59f, 0.00f, 40.70f),             //平行移動
-	D3DXQUATERNION(0.71f, 0.03f, 0.03f, -0.71f ),  //回転
+	"bilud_1",
+	D3DXVECTOR3(1.97f, 0.01f, 0.00f),             //平行移動
+	D3DXQUATERNION(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
 },
-
-//Palmtree
+//biud_2
 {
-	"Palmtree",
-	D3DXVECTOR3(7.59f, 0.00f, 40.70f),             //平行移動
-	D3DXQUATERNION(0.71f, 0.03f, 0.03f, -0.71f ),  //回転
+	"biud_2",
+	D3DXVECTOR3(4.63f, 0.00f, 3.58f),             //平行移動
+	D3DXQUATERNION(0.00f, 0.70f, 0.00f, 0.72f ),  //回転
 },
-
-//Palmtree
+//biud_3
 {
-	"Palmtree",
-	D3DXVECTOR3(6.59f, 0.00f, 40.70f),             //平行移動
-	D3DXQUATERNION(0.71f, 0.03f, 0.03f, -0.71f ),  //回転
+	"biud_3",
+	D3DXVECTOR3(3.30f, -0.07f, -0.05f),             //平行移動
+	D3DXQUATERNION(0.00f, -0.74f, 0.00f, 0.67f ),  //回転
 },
-
+//biud_4
+{
+	"biud_4",
+	D3DXVECTOR3(8.69f, 0.00f, 0.56f),             //平行移動
+	D3DXQUATERNION(0.00f, 0.00f, 0.00f, 1.00f ),  //回転
+},

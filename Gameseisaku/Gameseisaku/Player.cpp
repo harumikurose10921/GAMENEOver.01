@@ -4,7 +4,8 @@
 
 Player::Player()
 {
-	
+
+	direction.z = 1.0f;
 
 }
 
@@ -17,7 +18,7 @@ void Player::Init()
 {
 	tRodi = 0.0f;
 	position.x = 0.0f;
-	position.y = 0.0f;
+	position.y = 10.0f;
 	position.z = 0.0f;
 
 	//ÉâÉCÉgèâä˙âª
@@ -32,7 +33,7 @@ void Player::Init()
 	light.SetdiffuseLightColor(3, D3DXVECTOR4(0.2f, 0.2f, 0.2f, 1.0f));
 	light.SetambientLight(D3DXVECTOR4(0.3f, 0.3f, 0.3f, 1.0f));
 
-	modeldata.LoadModelData("Assets/model/Unity.x");
+	modeldata.LoadModelData("Assets/model/Querytyan.X");
 	model.Init(&modeldata);
 	model.SetLight(&light);
 }
@@ -60,6 +61,12 @@ void Player::Update()
 		tRodi = D3DXToRadian(90.0f);
 	}
 
+	if (GetAsyncKeyState(VK_SPACE) & 0x8000){
+		position.y += 0.05f;
+	}
+	else if (GetAsyncKeyState('M')&0x8000){
+		position.y -= 0.05f;
+	}
 	D3DXQUATERNION qRot;
 	D3DXVECTOR3 vY(0.0f, 0.1f, 0.0f);
 	D3DXQuaternionRotationAxis(&qRot, &vY, tRodi);

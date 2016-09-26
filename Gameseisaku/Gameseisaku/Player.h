@@ -12,6 +12,10 @@ public:
 	{
 		return position;
 	}
+	//Œü‚«‚ÌŽæ“¾
+	D3DXVECTOR3& GetDirection(){
+		return direction;
+	}
 
 	Player();
 	~Player();
@@ -29,5 +33,6 @@ private:
 	SkinModelData modeldata;
 	Light light;
 	Trun trun;
+	D3DXVECTOR3 direction;//Œü‚«
 	float tRodi;
 };
