@@ -11,6 +11,7 @@ void Init()
 {
 	game = new Game;
 	game->Start();
+	
 }
 //•`‰æˆ—B
 VOID Render()

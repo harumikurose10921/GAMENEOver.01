@@ -64,7 +64,7 @@ INT WINAPI wWinMain(HINSTANCE hInst, HINSTANCE, LPWSTR, INT)
 	RegisterClassEx(&wc);
 
 	// ウィンドウを作成。
-	HWND hWnd = CreateWindow("Shader Tutorial", "Shader Tutorial 00",
+	HWND hWnd = CreateWindow("Shader Tutorial", "GameNeo",
 		WS_OVERLAPPEDWINDOW, 100, 100, 900, 900,
 		NULL, NULL, wc.hInstance, NULL);
 	// Direct3Dを初期化。

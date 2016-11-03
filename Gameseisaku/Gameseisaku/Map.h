@@ -9,4 +9,5 @@ public:
 	void Render();
 private:
 	std::vector<MapChip*> mapChipList;	//マップチップのリスト。
+
 };

@@ -48,7 +48,7 @@ public:
 		return  position;
 	}
 
-	void CameraRo(float vF);
+	D3DXVECTOR3 CameraRo(float vF);
 	void Init(Player* player);
 	void Update();
 

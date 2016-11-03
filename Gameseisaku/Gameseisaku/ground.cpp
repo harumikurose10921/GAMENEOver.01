@@ -29,9 +29,14 @@ void ground::Init()
 	light.SetdiffuseLightColor(3, D3DXVECTOR4(0.2f, 0.2f, 0.2f, 1.0f));
 	light.SetambientLight(D3DXVECTOR4(0.3f, 0.3f, 0.3f, 1.0f));
 
-	modeldata.LoadModelData("Assets/model/court.x");
+	modeldata.LoadModelData("Assets/model/court.x",NULL);
 	model.Init(&modeldata);
 	model.SetLight(&light);
+	model.GetOrgMeshFirst();
+	mWorld = model.FindBoneWorldMatrix("court.x");
+	//メッシュコライダーを作成。
+	//meshcollider.CreateFromSkinModel(&model, mWorld);
+
 }
 void ground::Updeate()
 {
@@ -41,4 +46,27 @@ void ground::Updeate()
 void ground::Render()
 {
 	model.Draw(&game->GetCamera().GetviewMatrix(), &game->GetCamera().GetprojectionMatrix());
+}
+
+void ground::IsIntersect(const D3DXVECTOR3& pos,const D3DXVECTOR3& ray,int& bHit,float& len )
+{
+	D3DXMATRIX mWorldInv;
+	D3DXMatrixMultiply(&mWorldInv, &mWorldInv, mWorld);
+	D3DXVECTOR3 posInGround = pos;
+	D3DXVec3TransformCoord(&posInGround, &posInGround, &mWorldInv);
+	D3DXVECTOR3 rayInGround = ray;
+	D3DXVec3TransformCoord(&rayInGround, &rayInGround, &mWorldInv);
+	HRESULT hr = D3DXIntersect(
+		model.GetOrgMeshFirst(),
+		(const D3DXVECTOR3*)&posInGround,
+		(const D3DXVECTOR3*)&rayInGround,
+		&bHit,
+		NULL,
+		NULL,
+		NULL,
+		&len,
+		NULL,
+		NULL
+		);
+	
 }

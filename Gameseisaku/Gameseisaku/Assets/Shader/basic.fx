@@ -12,6 +12,7 @@ float4x4 g_rotationMatrix;		//回転行列。法線を回転させるために必要になる。ライテ
 float4	g_diffuseLightDirection[DIFFUSE_LIGHT_NUM];	//ディフューズライトの方向。
 float4	g_diffuseLightColor[DIFFUSE_LIGHT_NUM];		//ディフューズライトのカラー。
 float4	g_ambientLight;								//環境光。
+float4  eyePos;
 
 texture g_diffuseTexture;		//ディフューズテクスチャ。
 sampler g_diffuseTextureSampler = 
@@ -69,8 +70,12 @@ float4 PSMain( VS_OUTPUT In ) : COLOR
 		}
 		lig += g_ambientLight;
 	}
+	float4 eye = normalize(eyePos - In.worldPos);
+	float4 R = -eye + 2.0f*dot(In.normal, eye)*In.normal;
+	float4 spec = max(0.0f, dot(R, -g_diffuseLightDirection[0]));
+	spec = pow(spec, 2.0f);
 	float4 color = tex2D( g_diffuseTextureSampler, In.uv );
-	color.xyz *= lig;
+	color.xyz *= lig + spec;
 	return color;
 }
 

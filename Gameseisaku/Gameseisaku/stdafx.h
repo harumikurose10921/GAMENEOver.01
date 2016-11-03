@@ -8,6 +8,7 @@
 #include <strsafe.h>
 #pragma warning( default : 4996 )
 #include<cstdlib>
+#include <memory>
 #include <vector>
 #include <map>
 #include "System.h"
@@ -15,7 +16,9 @@
 #include "Camera.h"
 #include "SkinModel.h"
 #include "SkinModelData.h"
+#include "Animation.h"
 #include "Light.h"
-
+#include "btBulletDynamicsCommon.h"
+#include "BulletCollision\CollisionDispatch\btGhostObject.h"
 
 #include"game.h"

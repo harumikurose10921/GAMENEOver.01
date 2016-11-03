@@ -106,6 +106,7 @@ void Camera::Init(Player* player)
 	toPos = GetEyept() - GetLookatPt();
 	this->player = player;
 	Update();
+	
 }
 
 void Camera::Update()
@@ -114,11 +115,11 @@ void Camera::Update()
 	
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 	{
-		CameraRo(0.05f);
+		toPos = CameraRo(-0.05f);
 	}
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 	{
-		CameraRo(-0.05f);
+		toPos = CameraRo(0.05f);
 	}
 
 	D3DXMatrixLookAtLH(&viewMatrix, &vEyePt, &vLookatPt, &vUpVec);
@@ -128,13 +129,14 @@ void Camera::Update()
 	//SetPosition(vEyePt+toPos);
 }
 
-void Camera::CameraRo(float vF)
+D3DXVECTOR3 Camera::CameraRo(float vF)
 {
 	toPos = GetEyept() - GetLookatPt();
 	D3DXMatrixRotationY(&Rot, vF);
-	D3DXVec3Transform(&OutPos, &toPos, &Rot);
-	cameraPos.x = GetLookatPt().x + OutPos.x;
-	cameraPos.y = GetLookatPt().y + OutPos.y;
-	cameraPos.z = GetLookatPt().z + OutPos.z;
-	SetEyept(cameraPos);
+	D3DXVec3TransformNormal(&toPos, &toPos, &Rot);
+	//cameraPos.x = GetLookatPt().x + OutPos.x;
+	//cameraPos.y = GetLookatPt().y + OutPos.y;
+	//cameraPos.z = GetLookatPt().z + OutPos.z;
+	//SetEyept(cameraPos);
+	return toPos;
 }

@@ -13,6 +13,7 @@ float		g_numBone;			//骨の数。
 float4x4	g_worldMatrix;			//!<ワールド行列。
 float4x4	g_rotationMatrix;		//!<回転行列。
 float4x4	g_viewMatrixRotInv;		//!<カメラの回転行列の逆行列。
+float3 eyePos;
 
 bool g_isHasNormalMap;			//法線マップ保持している？
 
@@ -34,9 +35,9 @@ sampler g_normalMapSampler =
 sampler_state
 {
 	Texture = <g_normalTexture>;
-    MipFilter = NONE;
-    MinFilter = NONE;
-    MagFilter = NONE;
+	MipFilter = LINEAR;
+	MinFilter = LINEAR;
+	MagFilter = LINEAR;
     AddressU = Wrap;
 	AddressV = Wrap;
 };
@@ -64,6 +65,7 @@ struct VS_OUTPUT
     float3  Normal			: NORMAL;
     float2  Tex0   			: TEXCOORD0;
     float3	Tangent			: TEXCOORD1;	//接ベクトル
+	float4	worldPos 	    : TEXCOORD2;
 };
 /*!
  *@brief	ワールド座標とワールド法線をスキン行列から計算する。
@@ -120,6 +122,7 @@ VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
 {
 	VS_OUTPUT o = (VS_OUTPUT)0;
 	float3 Pos, Normal, Tangent;
+	
 	if(hasSkin){
 		//スキンあり。
 	    CalcWorldPosAndNormalFromSkinMatrix( In, Pos, Normal, Tangent );
@@ -127,6 +130,7 @@ VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
 		//スキンなし。
 		CalcWorldPosAndNormal( In, Pos, Normal, Tangent );
 	}
+	o.worldPos = float4(Pos,1.0f);
     o.Pos = mul(float4(Pos.xyz, 1.0f), g_mViewProj);
     o.Normal = normalize(Normal);
     o.Tangent = normalize(Tangent);
@@ -138,11 +142,21 @@ VS_OUTPUT VSMain( VS_INPUT In, uniform bool hasSkin )
  */
 float4 PSMain( VS_OUTPUT In ) : COLOR
 {
+
+	
 	float4 color = tex2D(g_diffuseTextureSampler, In.Tex0);
 	float3 normal = In.Normal;
 		
 	float4 lig = DiffuseLight(normal);
-	color *= lig;
+
+	float3 eye = normalize(eyePos - In.worldPos);
+	float3 R = -eye + 2.0f*dot(In.Normal, eye)*In.Normal;
+	float3 spec = max(0.0f, dot(R, -g_light.diffuseLightDir[0]));
+	spec = pow(spec, 2.0f);
+
+	lig.xyz += spec.xyz;
+
+	color.xyz *= lig;
 	
 	return color;
 }

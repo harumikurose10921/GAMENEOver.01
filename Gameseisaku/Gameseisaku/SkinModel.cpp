@@ -2,9 +2,12 @@
 #include"SkinModel.h"
 #include"SkinModelData.h"
 #include "Light.h"
+#include "game.h"
+
 
 extern UINT                 g_NumBoneMatricesMax;
 extern D3DXMATRIXA16*       g_pBoneMatrices;
+
 namespace{
 	void DrawMeshContainer(
 		IDirect3DDevice9* pd3dDevice,
@@ -12,6 +15,7 @@ namespace{
 		LPD3DXFRAME pFrameBase,
 		ID3DXEffect* pEffect,
 		D3DXMATRIX* worldMatrix,
+
 		D3DXMATRIX* rotationMatrix,
 		D3DXMATRIX* viewMatrix,
 		D3DXMATRIX* projMatrix,
@@ -106,9 +110,11 @@ namespace{
 
 			pEffect->SetMatrix("g_worldMatrix", &mWorld);
 			pEffect->SetMatrix("g_rotationMatrix", rotationMatrix);
+			pEffect->SetVector("eyePos", &D3DXVECTOR4(game->GetCamera().GetEyept()));
 			pEffect->Begin(0, D3DXFX_DONOTSAVESTATE);
 			pEffect->BeginPass(0);
-
+			
+			
 			for (DWORD i = 0; i < pMeshContainer->NumMaterials; i++) {
 				pEffect->SetTexture("g_diffuseTexture", pMeshContainer->ppTextures[i]);
 				pEffect->CommitChanges();

@@ -16,12 +16,13 @@ struct D3DXMESHCONTAINER_DERIVED : public D3DXMESHCONTAINER {
 	bool UseSoftwareVP;
 	DWORD iAttributeSW;
 };
+class Animation;
 class SkinModelData
 {
 public:
 	SkinModelData();
 	~SkinModelData();
-	void LoadModelData(const char* filePath);
+	void LoadModelData(const char* filePath,Animation* anim);
 	void Release();
 		LPD3DXFRAME GetFrameRoot()
 	{
@@ -31,8 +32,22 @@ public:
 	{
 			return pAnimController;
 	}
+
+
+	D3DXMATRIX* GetRootBoneMatrix()
+	{
+		D3DXFRAME_DERIVED* frameDer = (D3DXFRAME_DERIVED*)frameRoot;
+		return &frameDer->CombinedTransformationMatrix;
+	}
 	void UpdateBoneMatrix(const D3DXMATRIX& matWorld);
+	//先頭のメッシュを取得
+	LPD3DXMESH GetOrgMeshFirst() const;
+	//骨のワールド行列を検索
+	//頻繁に呼ぶと重くなるので注意
+	D3DXMATRIX* FindBoneWorldMatrix(const char* boneName);
 private:
+	D3DXMATRIX* FindBoneWorldMatrix(const char* boneName, LPD3DXFRAME frame);
+	LPD3DXMESH GetOrgMesh(LPD3DXFRAME frame) const;
 	LPD3DXFRAME					frameRoot;		//フレームルート。
 	ID3DXAnimationController*   pAnimController;
 };
