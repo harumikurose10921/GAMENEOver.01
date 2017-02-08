@@ -14,11 +14,15 @@
 #include "System.h"
 
 #include "Camera.h"
+#include "GameCamera.h"
 #include "SkinModel.h"
 #include "SkinModelData.h"
 #include "Animation.h"
 #include "Light.h"
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"
-
+#include "RenderTarget.h"
 #include"game.h"
+
+extern RenderTarget* mainRenderTarget;	//!<18-2 メインレンダリングターゲット。
+extern void DrawQuadPrimitive();

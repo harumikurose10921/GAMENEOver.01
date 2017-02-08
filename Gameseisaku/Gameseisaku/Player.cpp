@@ -21,8 +21,7 @@ void Player::Init()
 	/*position.x = 3.0f;
 	position.y = 38.0f;
 	position.z = 0.0f;*/
-	moveDir = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-	
+	moveDir = D3DXVECTOR3(0.0f, 15.0f, 0.0f);
 
 	//ライト初期化
 	light.SetdiffuseLightDirection(0, D3DXVECTOR4(0.707f, 0.0f, -0.707f, 1.0f));
@@ -34,7 +33,7 @@ void Player::Init()
 	light.SetdiffuseLightColor(1, D3DXVECTOR4(0.2f, 0.2f, 0.2f, 1.0f));
 	light.SetdiffuseLightColor(2, D3DXVECTOR4(0.3f, 0.3f, 0.3f, 1.0f));
 	light.SetdiffuseLightColor(3, D3DXVECTOR4(0.2f, 0.2f, 0.2f, 1.0f));
-	light.SetambientLight(D3DXVECTOR4(0.3f, 0.3f, 0.3f, 1.0f));
+	light.SetambientLight(D3DXVECTOR4(0.3f,0.3f, 0.3f, 1.0f));
 
 	modeldata.LoadModelData("Assets/model/Querytyan.X",&animation);
 	model.Init(&modeldata);
@@ -42,7 +41,7 @@ void Player::Init()
 
 	//キャラクタコントローラを初期化。
 	characterController.Init(0.3f, 1.0f, pos);
-	characterController.SetGravity(-10.0f);	//重力強め。
+	characterController.SetGravity(-15.0f);	//重力強め。
 
 }
 

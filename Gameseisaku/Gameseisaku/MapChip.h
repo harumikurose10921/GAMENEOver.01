@@ -15,7 +15,7 @@ class MapChip{
 public:
 	MapChip();
 	~MapChip();
-	void Init(const char* name);
+	void Init(const char* name ,D3DXVECTOR3 pos,D3DXQUATERNION rot);
 	void Start();
 	void Update();
 	void Render();
@@ -25,6 +25,7 @@ private:
 	SkinModel						skinModel;
 	D3DXVECTOR3						Scale;
 	D3DXVECTOR3						position;
+	D3DXQUATERNION					rotation;
 	Light							light;
 	//D3DXMATRIX					worldMatrixBuffer;	//ワールド行列のバッファ
 	MeshCollider					meshCollider;		//メッシュコライダー。

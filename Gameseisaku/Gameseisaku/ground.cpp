@@ -35,7 +35,7 @@ void ground::Init()
 	model.GetOrgMeshFirst();
 	mWorld = model.FindBoneWorldMatrix("court.x");
 	//メッシュコライダーを作成。
-	//meshcollider.CreateFromSkinModel(&model, mWorld);
+	meshcollider.CreateFromSkinModel(&model, mWorld);
 
 }
 void ground::Updeate()

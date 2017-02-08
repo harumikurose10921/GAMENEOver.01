@@ -115,28 +115,37 @@ void Camera::Update()
 	
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 	{
-		toPos = CameraRo(-0.05f);
+		CameraRo(-0.05f);
 	}
 	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 	{
-		toPos = CameraRo(0.05f);
+		CameraRo(0.05f);
 	}
 
 	D3DXMatrixLookAtLH(&viewMatrix, &vEyePt, &vLookatPt, &vUpVec);
 	D3DXMatrixPerspectiveFovLH(&projectionMatrix, D3DX_PI / 4, aspect, Near, Far);
 	SetLookatPt(player->GetPosition());
 	SetEyept(player->GetPosition() + toPos);
-	//SetPosition(vEyePt+toPos);
+	SetPosition(vEyePt+toPos);
 }
 
-D3DXVECTOR3 Camera::CameraRo(float vF)
+void Camera::CameraRo(float vF)
 {
-	toPos = GetEyept() - GetLookatPt();
+	D3DXQUATERNION mAxisy;
+	D3DXVECTOR4 v;
+	//toPos = GetEyept() - GetLookatPt();
 	D3DXMatrixRotationY(&Rot, vF);
-	D3DXVec3TransformNormal(&toPos, &toPos, &Rot);
-	//cameraPos.x = GetLookatPt().x + OutPos.x;
-	//cameraPos.y = GetLookatPt().y + OutPos.y;
-	//cameraPos.z = GetLookatPt().z + OutPos.z;
-	//SetEyept(cameraPos);
-	return toPos;
+	D3DXQuaternionRotationAxis(&mAxisy, &vUpVec, vF);
+	D3DXMatrixRotationQuaternion(&Rot, &mAxisy);
+	D3DXVec3Transform(&v, &toPos, &Rot);
+	toPos.x = v.x;
+	toPos.y = v.y;
+	toPos.z = v.z;
+
+	//D3DXVec3TransformNormal(&toPos, &toPos, &Rot);
+	/*cameraPos.x = GetLookatPt().x + OutPos.x;
+	cameraPos.y = GetLookatPt().y + OutPos.y;
+	cameraPos.z = GetLookatPt().z + OutPos.z;
+	SetEyept(cameraPos);
+	return toPos;*/
 }

@@ -1,6 +1,8 @@
 #pragma once
-#include "turn.h"
+//#include "turn.h"
 #include "CharacterController.h"
+
+
 class Game;
 class Animation;
 class Player
@@ -8,8 +10,9 @@ class Player
 public:
 	void SetPosition(D3DXVECTOR3 pos)
 	{
-		position = pos;
+	   position = pos;
 	}
+	
 	D3DXVECTOR3 GetPosition()
 	{
 		return characterController.GetPosition();
@@ -35,7 +38,7 @@ private:
 	SkinModel model;
 	SkinModelData modeldata;
 	Light light;
-	Trun trun;
+	//Trun trun;
 	D3DXVECTOR3 direction;//向き
 	Animation animation;
 	float tRodi;
@@ -44,4 +47,6 @@ private:
     float       moveSpeed;
 	D3DXVECTOR3 pos = D3DXVECTOR3(3.0f, 38.0f, 0.0f);
 	CharacterController characterController;//キャラクターコントローラー
+	//bool des;
+	
 };
