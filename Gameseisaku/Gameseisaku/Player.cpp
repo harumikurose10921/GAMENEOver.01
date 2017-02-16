@@ -18,9 +18,6 @@ Player::~Player()
 void Player::Init()
 {
 	tRodi = 0.0f;
-	/*position.x = 3.0f;
-	position.y = 38.0f;
-	position.z = 0.0f;*/
 	moveDir = D3DXVECTOR3(0.0f, 15.0f, 0.0f);
 
 	//ライト初期化
@@ -41,7 +38,7 @@ void Player::Init()
 
 	//キャラクタコントローラを初期化。
 	characterController.Init(0.3f, 1.0f, pos);
-	characterController.SetGravity(-15.0f);	//重力強め。
+	characterController.SetGravity(-10.0f);	//重力強め。
 
 }
 
@@ -62,42 +59,58 @@ void Player::Update()
 
 	/*animation.PlayAnimation(0);
 	animation.Update(0.0166);*/
-
+	//前移動
 	if (GetAsyncKeyState('W')&0x8000){
 		moveDir += toPos;
 		moveSpeed = fMoveSpeed;
 	}
+	//後移動
 	else if (GetAsyncKeyState('S') & 0x8000){
 		moveDir -= toPos;
 		moveSpeed = fMoveSpeed;
 	}
-	
+	//左移動
 	if (GetAsyncKeyState('A') & 0x8000){
 		moveDir += toSide;
 		moveSpeed = fMoveSpeed;
 	}
+	//右移動
 	else if (GetAsyncKeyState('D') & 0x8000){
 		moveDir -= toSide;
 		moveSpeed = fMoveSpeed;
 	}
+	//加速
+	if (GetAsyncKeyState(VK_SHIFT) & 0x8000) {
+		moveSpeed = fMoveSpeed * 2;
+	}
 
 	D3DXVec3Normalize(&moveDir, &moveDir);
 	//プレイヤーをカメラの方向に向かって進ませる
-	
 	c_movespeed = moveDir * moveSpeed;
 	c_movespeed.y = characterController.GetMoveSpeed().y;
 
-	if (GetAsyncKeyState(VK_SPACE) != 0){
-		c_movespeed.y = 5.0f;
-		characterController.Jump();
+	//地面にいるときにジャンプ
+	if (characterController.IsOnGround()==true) 
+	{
+		if (GetAsyncKeyState(VK_SPACE) != 0) 
+		{
+			c_movespeed.y = 5.0f;
+			characterController.Jump();
+	   }
 	}
+	
 	//キャラクタが動く速度を設定。
 	characterController.SetMoveSpeed(c_movespeed);
-
 	//キャラクタコントローラーを実行。
 	characterController.Execute();
 	position = characterController.GetPosition();
-	
+	//死亡
+	if (position.y < -1.0f)
+	{
+		//確認用
+		MessageBox(NULL, "落ちたよ", "MesegeBox", NULL);
+	}
+
 	D3DXQUATERNION qRot;
 	D3DXVECTOR3 vY(0.0f, 0.1f, 0.0f);
 	D3DXQuaternionRotationAxis(&qRot, &vY, atan2f(moveDir.x,moveDir.z));

@@ -19,6 +19,11 @@ public:
 	}
 	//void IsIntersect(const D3DXVECTOR3& pos, const D3DXVECTOR3& ray, int& bHit, float& len);
 	void SetGoal();
+	void SetPlayer(Player *p)
+	{
+		player = p;
+	}
+
 private:
 	D3DXVECTOR3 position;
 	D3DXMATRIX*  mWorld;//ワールド行列
@@ -26,9 +31,8 @@ private:
 	SkinModel model;
 	SkinModelData modeldata;
 	Light light;
-	//MeshCollider meshcollider;//メッシュコライダー
-	bool					Ongoal;
-	bool					goalflag;
-	Player player;
+	bool					Ongoal = false;
+	bool					goalflag = false;
+	Player *player;
 
 };

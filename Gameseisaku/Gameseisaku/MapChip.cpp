@@ -11,21 +11,23 @@ MapChip::~MapChip(){
 	game->GetPhysicsWorld()->RemoveRigidBody(&rigidBody);
 }
 
-void MapChip::Init(const char*name,D3DXVECTOR3 pos,D3DXQUATERNION rot)
+void MapChip::Init(const char*name,D3DXVECTOR3 pos,D3DXQUATERNION rot,D3DXVECTOR3 sc)
 {
+	sc.x *= -1;
 	//まずはスキンモデルをロード。
 	char modelPath[256];
 	sprintf(modelPath, "Assets/model/%s.X",name);
 	skinmodelData.LoadModelData(modelPath,NULL);
-		
+	
 	skinModel.Init(&skinmodelData);
 	skinModel.SetLight(&light);
-	skinModel.UpdateWorldMatrix(pos, rot, D3DXVECTOR3(1.0f, 1.0f, 1.0f));
+	skinModel.UpdateWorldMatrix(pos, rot, sc/*D3DXVECTOR3(1.0f, 1.0f, 1.0f)*/);
 	//スキンモデルからメッシュコライダーを作成する。
 	D3DXMATRIX* rootBoneMatrix = skinmodelData.GetRootBoneMatrix();
 	meshCollider.CreateFromSkinModel(&skinModel, rootBoneMatrix);
 	position = pos;
 	rotation = rot;
+	scale = sc;
 	//剛体を作成するための情報を設定。
 	RigidBodyInfo rbInfo;
 	rbInfo.collider = &meshCollider;

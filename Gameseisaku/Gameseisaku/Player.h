@@ -38,15 +38,14 @@ private:
 	SkinModel model;
 	SkinModelData modeldata;
 	Light light;
-	//Trun trun;
 	D3DXVECTOR3 direction;//向き
 	Animation animation;
 	float tRodi;
 	D3DXVECTOR3 moveDir;//動く方向
 	D3DXVECTOR3 c_movespeed;
     float       moveSpeed;
-	D3DXVECTOR3 pos = D3DXVECTOR3(3.0f, 38.0f, 0.0f);
-	CharacterController characterController;//キャラクターコントローラー
-	//bool des;
+	D3DXVECTOR3 pos = D3DXVECTOR3(3.0f, 30.0f, 0.0f);
+	CharacterController characterController;		//キャラクターコントローラー
+	bool des = false;								//死亡
 	
 };

@@ -9,13 +9,14 @@ struct SMapChipLocInfo{
 	const char* modelName;		//モデル
 	D3DXVECTOR3 pos;			//座標
 	D3DXQUATERNION rotation;	//回転
+	D3DXVECTOR3 scale;			//拡大
 };
 
 class MapChip{
 public:
 	MapChip();
 	~MapChip();
-	void Init(const char* name ,D3DXVECTOR3 pos,D3DXQUATERNION rot);
+	void Init(const char* name ,D3DXVECTOR3 pos,D3DXQUATERNION rot,D3DXVECTOR3 sc);
 	void Start();
 	void Update();
 	void Render();
@@ -26,6 +27,7 @@ private:
 	D3DXVECTOR3						Scale;
 	D3DXVECTOR3						position;
 	D3DXQUATERNION					rotation;
+	D3DXVECTOR3						scale;
 	Light							light;
 	//D3DXMATRIX					worldMatrixBuffer;	//ワールド行列のバッファ
 	MeshCollider					meshCollider;		//メッシュコライダー。

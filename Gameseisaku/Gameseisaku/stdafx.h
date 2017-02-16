@@ -11,6 +11,7 @@
 #include <memory>
 #include <vector>
 #include <map>
+#include <list>
 #include "System.h"
 
 #include "Camera.h"

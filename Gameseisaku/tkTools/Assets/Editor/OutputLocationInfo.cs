@@ -35,10 +35,11 @@ public class OutputLocationInfo : MonoBehaviour {
             headerTxt += string.Format("\t\"{0}\",\n", modelName);                       
             headerTxt += string.Format("\tD3DXVECTOR3({0:f}f, {1:f}f, {2:f}f),             //平行移動\n", tr.localPosition.x, tr.localPosition.y, tr.localPosition.z);
             headerTxt += string.Format("\tD3DXQUATERNION({0:f}f, {1:f}f, {2:f}f, {3:f}f ),  //回転\n", tr.localRotation.x, tr.localRotation.y, tr.localRotation.z, tr.localRotation.w);
+            headerTxt += string.Format("\tD3DXVECTOR3({0:f}f, {1:f}f, {2:f}f),             //拡大\n", tr.localScale.x, tr.localScale.y, tr.localScale.z);
             headerTxt += "},\n";
         }
 
-        StreamWriter sw = new StreamWriter(@"C:\GitHub\GAMENEOver.01\Gameseisaku\Gameseisaku\locationInfo.h", false, Encoding.UTF8);
+        StreamWriter sw = new StreamWriter(@"C:\Users\a\Desktop\Git\GAMENEOver.01\Gameseisaku\Gameseisaku\locationInfo.h", false, Encoding.UTF8);
         sw.Write(headerTxt);
         sw.Close();
     }

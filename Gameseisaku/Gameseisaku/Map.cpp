@@ -25,7 +25,7 @@ void Map::Start()
 	for (int i = 0; i < tableSize; i++){
 		//マップチップを生0成.		
 		MapChip* mapChip = new MapChip;
-		mapChip->Init(mapChipLocInfoTable[i].modelName, mapChipLocInfoTable[i].pos, mapChipLocInfoTable[i].rotation);
+		mapChip->Init(mapChipLocInfoTable[i].modelName, mapChipLocInfoTable[i].pos, mapChipLocInfoTable[i].rotation,mapChipLocInfoTable[i].scale);
 		mapChipList.push_back(mapChip);
 		//delete mapchipList.second;
 	}

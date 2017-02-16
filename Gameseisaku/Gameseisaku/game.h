@@ -27,15 +27,14 @@ public:
 		return &physicsWorld;
 	}
 private:
-	Player player;
-	Camera camera;
+	Player player;//プレイヤー
+	Camera camera;//カメラ
 	Goal goal;
-	//GameCamera Gcamera;
 	ground ground;
-	Sky    sky;
-	Map    map;
-	PhysicsWorld  physicsWorld;
-	Bloom bloom;
+	Sky    sky;//スカイボックス
+	Map    map;//マップ
+	PhysicsWorld  physicsWorld;//フィジックスワールド
+	Bloom bloom;//ブルーム
 
 };
 extern Game* game;
